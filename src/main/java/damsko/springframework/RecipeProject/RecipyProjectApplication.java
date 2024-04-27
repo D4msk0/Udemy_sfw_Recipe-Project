@@ -1,4 +1,4 @@
-package damsko.springframework.RecipyProject;
+package damsko.springframework.RecipeProject;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
