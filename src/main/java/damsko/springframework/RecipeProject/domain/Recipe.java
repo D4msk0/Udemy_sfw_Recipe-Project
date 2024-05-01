@@ -43,10 +43,9 @@ public class Recipe {
         notes.setRecipe(this);
     }
 
-    public Recipe addIngredient(Ingredient ingredient){
+    public void addIngredient(Ingredient ingredient){
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
-        return this;
     }
 
     @ManyToMany
