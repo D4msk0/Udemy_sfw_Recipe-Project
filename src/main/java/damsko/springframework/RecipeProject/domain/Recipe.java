@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Entity
@@ -22,6 +24,9 @@ public class Recipe {
     private String directions;
     //todo add
     //private Difficulty difficulty
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     @Lob
     private Byte[] image;
