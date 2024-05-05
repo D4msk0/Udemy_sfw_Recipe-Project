@@ -2,8 +2,6 @@ package damsko.springframework.RecipeProject.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -49,9 +47,8 @@ public class Recipe {
         notes.setRecipe(this);
     }
 
-    public Recipe addIngredient(Ingredient ingredient){
+    public void addIngredient(Ingredient ingredient){
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
-        return this;
     }
 }

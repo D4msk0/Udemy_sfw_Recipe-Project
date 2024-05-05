@@ -1,5 +1,6 @@
 package damsko.springframework.RecipeProject.services;
 
+import damsko.springframework.RecipeProject.commands.RecipeCommand;
 import damsko.springframework.RecipeProject.domain.Recipe;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +12,6 @@ public interface RecipeService {
     Set<Recipe> getRecipes();
 
     Recipe findById(long id);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand command);
 }
