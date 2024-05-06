@@ -49,6 +49,7 @@ public class RecipeCommandToRecipeTest {
 
     @Test
     public void convert() throws Exception {
+
         //given
         RecipeCommand recipeCommand = new RecipeCommand();
         recipeCommand.setId(RECIPE_ID);
