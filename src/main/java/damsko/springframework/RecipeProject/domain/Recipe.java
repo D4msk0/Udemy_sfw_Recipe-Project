@@ -2,7 +2,9 @@ package damsko.springframework.RecipeProject.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,9 +22,9 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
-    //todo add
-    //private Difficulty difficulty
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<>();
@@ -33,6 +35,7 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
 
+//    @EqualsAndHashCode.Exclude
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
@@ -43,8 +46,10 @@ public class Recipe {
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes){
-        this.notes = notes;
-        notes.setRecipe(this);
+        if(notes != null){
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 
     public void addIngredient(Ingredient ingredient){
