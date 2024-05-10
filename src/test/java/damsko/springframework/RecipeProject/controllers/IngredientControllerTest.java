@@ -1,6 +1,8 @@
 package damsko.springframework.RecipeProject.controllers;
 
+import damsko.springframework.RecipeProject.commands.IngredientCommand;
 import damsko.springframework.RecipeProject.commands.RecipeCommand;
+import damsko.springframework.RecipeProject.services.IngredientService;
 import damsko.springframework.RecipeProject.services.RecipeService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +19,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class IngredientControllerTest {
 
     @Mock
+    IngredientService ingredientService;
+
+    @Mock
     RecipeService recipeService;
 
     IngredientController controller;
@@ -27,7 +32,7 @@ public class IngredientControllerTest {
     public void setUp(){
         MockitoAnnotations.openMocks(this);
 
-        controller = new IngredientController(recipeService);
+        controller = new IngredientController(recipeService, ingredientService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
@@ -45,5 +50,20 @@ public class IngredientControllerTest {
 
         //then
         verify(recipeService, times(1)).findCommandById(anyLong());
+    }
+
+    @Test
+    public void testShowIngredient() throws Exception {
+        //given
+        IngredientCommand ingredientCommand = new IngredientCommand();
+
+        //when
+        when(ingredientService.findByRecipeIdAndIngredientId(anyLong(), anyLong())).thenReturn(ingredientCommand);
+
+        //then
+        mockMvc.perform(get("/recipe/1/ingredients/2/show"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredients/show"))
+                .andExpect(model().attributeExists("ingredient"));
     }
 }
