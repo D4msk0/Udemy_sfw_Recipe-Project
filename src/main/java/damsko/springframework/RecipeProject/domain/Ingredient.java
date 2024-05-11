@@ -17,7 +17,7 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private UnitOfMeasure uom;
 
     @ManyToOne
@@ -28,5 +28,15 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                ", uom=" + uom +
+                '}';
     }
 }

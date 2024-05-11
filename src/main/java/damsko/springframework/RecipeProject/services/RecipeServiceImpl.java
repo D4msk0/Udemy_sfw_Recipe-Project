@@ -67,4 +67,5 @@ public class RecipeServiceImpl implements RecipeService {
     public void deleteById(long idToDelete) {
         recipeRepository.deleteById(idToDelete);
     }
+
 }

@@ -56,4 +56,21 @@ public class Recipe {
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
     }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", prepTime=" + prepTime +
+                ", cookTime=" + cookTime +
+                ", servings=" + servings +
+                ", source='" + source + '\'' +
+                ", url='" + url + '\'' +
+                ", directions='" + directions + '\'' +
+                ", ingredients=" + ingredients +
+                '}';
+    }
+
+
 }
