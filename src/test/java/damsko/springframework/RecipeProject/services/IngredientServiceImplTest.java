@@ -1,11 +1,14 @@
 package damsko.springframework.RecipeProject.services;
 
 import damsko.springframework.RecipeProject.commands.IngredientCommand;
+import damsko.springframework.RecipeProject.converters.IngredientCommandToIngredient;
 import damsko.springframework.RecipeProject.converters.IngredientToIngredientCommand;
+import damsko.springframework.RecipeProject.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import damsko.springframework.RecipeProject.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import damsko.springframework.RecipeProject.domain.Ingredient;
 import damsko.springframework.RecipeProject.domain.Recipe;
 import damsko.springframework.RecipeProject.repositories.RecipeRepository;
+import damsko.springframework.RecipeProject.repositories.UnitOfMeasureRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -20,22 +23,28 @@ import static org.mockito.Mockito.*;
 public class IngredientServiceImplTest {
 
     private final IngredientToIngredientCommand ingredientToIngredientCommand;
+    private final IngredientCommandToIngredient ingredientCommandToIngredient;
 
     @Mock
     RecipeRepository recipeRepository;
+
+    @Mock
+    UnitOfMeasureRepository unitOfMeasureRepository;
 
     IngredientService ingredientService;
 
     //init converters
     public IngredientServiceImplTest() {
         this.ingredientToIngredientCommand = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
+        this.ingredientCommandToIngredient = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
 
-        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, recipeRepository);
+        ingredientService = new IngredientServiceImpl(ingredientToIngredientCommand, ingredientCommandToIngredient,
+                recipeRepository, unitOfMeasureRepository);
     }
 
     @Test
